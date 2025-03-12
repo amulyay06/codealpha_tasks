@@ -1,0 +1,29 @@
+import nltk
+from nltk.chat.util import Chat, reflections
+
+# Define chatbot responses (Pattern → Response)
+faq_pairs = [
+    [r"hi|hello|hey", ["Hello! How can I assist you today?"]],
+    [r"what is your name?", ["I'm an FAQ chatbot, here to answer your questions!"]],
+    [r"how does this product work?", ["Our product is designed to simplify your tasks efficiently."]],
+    [r"what are your working hours?", ["We are available 24/7 to assist you."]],
+    [r"how can I contact support?", ["You can contact support via email at support@example.com."]],
+    [r"bye|exit", ["Goodbye! Have a great day!", "See you later!"]],
+]
+
+# Initialize chatbot
+chatbot = Chat(faq_pairs, reflections)
+
+def start_chat():
+    """Starts the FAQ chatbot."""
+    print("🤖 FAQ Chatbot: Hello! Ask me a question (type 'bye' to exit).")
+    while True:
+        user_input = input("You: ").lower()
+        if user_input in ["bye", "exit"]:
+            print("🤖 Chatbot: Goodbye!")
+            break
+        response = chatbot.respond(user_input)
+        print(f"🤖 Chatbot: {response if response else 'I am not sure about that. Please ask something else!'}")
+
+# Run chatbot
+start_chat()
